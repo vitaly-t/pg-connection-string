@@ -22,7 +22,7 @@ function parse(str) {
         config.client_encoding = config.encoding;
     }
 
-    // primary sockets support, via parameter 'socket', which also allows use of '/' in the socket name:
+    // primary sockets support, via parameter 'socket':
     if (config.socket) {
         config.host = config.socket;
         return config;
