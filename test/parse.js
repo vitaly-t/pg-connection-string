@@ -1,5 +1,6 @@
 'use strict';
 
+var EOL = require('os').EOL;
 var chai = require('chai');
 var expect = chai.expect;
 chai.should();
@@ -165,7 +166,7 @@ describe('parse', function(){
     var connectionString = 'pg:///?sslcert=' + __dirname + '/example.cert';
     var subject = parse(connectionString);
     subject.ssl.should.eql({
-      cert: 'example cert\n'
+      cert: 'example cert' + EOL
     });
   });
 
@@ -173,7 +174,7 @@ describe('parse', function(){
     var connectionString = 'pg:///?sslkey=' + __dirname + '/example.key';
     var subject = parse(connectionString);
     subject.ssl.should.eql({
-      key: 'example key\n'
+      key: 'example key' + EOL
     });
   });
 
@@ -181,7 +182,7 @@ describe('parse', function(){
     var connectionString = 'pg:///?sslrootcert=' + __dirname + '/example.ca';
     var subject = parse(connectionString);
     subject.ssl.should.eql({
-      ca: 'example ca\n'
+      ca: 'example ca' + EOL
     });
   });
 
