@@ -44,14 +44,14 @@ describe('parse', () => {
     });
 
     it('initializing with unix domain socket, the healthy way', () => {
-        const subject = parse('//my%5Bdb%5D?encoding=utf8&socket=' + encodeURIComponent('/some path/'));
+        const subject = parse('/my%5Bdb%5D?encoding=utf8&socket=' + encodeURIComponent('/some path/'));
         subject.host.should.equal('/some path/');
         subject.database.should.equal('my[db]', 'must to be escaped and unescaped trough "my%5Bdb%5D"');
         subject.client_encoding.should.equal('utf8');
     });
 
-    it('initializing with unix domain socket, the escaped health way', () => {
-        const subject = parse('//my%2Bdb?encoding=utf8&socket=' + encodeURIComponent('/some path/'));
+    it('initializing with unix domain socket, the escaped healthy way', () => {
+        const subject = parse('/my%2Bdb?encoding=utf8&socket=' + encodeURIComponent('/some path/'));
         subject.host.should.equal('/some path/');
         subject.database.should.equal('my+db');
         subject.client_encoding.should.equal('utf8');
