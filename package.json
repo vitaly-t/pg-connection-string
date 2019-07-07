@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/iceddev/pg-connection-string",
   "dependencies": {
-    "connection-string": "^2.4.4"
+    "connection-string": "^2.4.5"
   },
   "devDependencies": {
     "chai": "^4.1.1",
