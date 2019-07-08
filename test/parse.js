@@ -5,6 +5,7 @@ const EOL = require('os').EOL;
 const chai = require('chai');
 chai.should();
 
+const expect = chai.expect;
 const parse = require('../').parse;
 
 describe('parse', () => {
@@ -208,9 +209,10 @@ describe('parse', () => {
         subject.client_encoding.should.equal('utf8');
     });
 
-    it('return last value of repeated parameter', () => {
+    it('must throw on repeated parameters', () => {
         const connectionString = 'pg:///?keepalives=1&keepalives=0';
-        const subject = parse(connectionString);
-        subject.keepalives.should.equal('0');
+        expect(() => {
+            parse(connectionString);
+        }).throw('Parameter "keepalives" is repeated.');
     });
 });
