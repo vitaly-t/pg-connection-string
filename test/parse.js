@@ -32,34 +32,34 @@ describe('parse', () => {
     });
 
     it('initializing with unix domain socket', () => {
-        const subject1 = parse('?socket=' + encodeURIComponent('/const/run/'));
+        const subject1 = parse('%2Fconst%2Frun%2F');
         subject1.host.should.equal('/const/run/');
         const subject2 = parse('test.domain.sock');
         subject2.host.should.equal('test.domain.sock');
     });
 
     it('initializing with unix domain socket and a specific database, the simple way', () => {
-        const subject = parse('/mydb?socket=' + encodeURIComponent('/const/run/'));
+        const subject = parse('%2Fconst%2Frun%2F/mydb');
         subject.host.should.equal('/const/run/');
         subject.database.should.equal('mydb');
     });
 
     it('initializing with unix domain socket, the healthy way', () => {
-        const subject = parse('/my%5Bdb%5D?encoding=utf8&socket=' + encodeURIComponent('/some path/'));
+        const subject = parse('%2Fsome%20path%2F/my%5Bdb%5D?encoding=utf8');
         subject.host.should.equal('/some path/');
-        subject.database.should.equal('my[db]', 'must to be escaped and unescaped trough "my%5Bdb%5D"');
+        subject.database.should.equal('my[db]', 'must be escaped and unescaped trough "my%5Bdb%5D"');
         subject.client_encoding.should.equal('utf8');
     });
 
     it('initializing with unix domain socket, the escaped healthy way', () => {
-        const subject = parse('/my%2Bdb?encoding=utf8&socket=' + encodeURIComponent('/some path/'));
+        const subject = parse('%2Fsome%20path%2F/my%2Bdb?encoding=utf8');
         subject.host.should.equal('/some path/');
         subject.database.should.equal('my+db');
         subject.client_encoding.should.equal('utf8');
     });
 
     it('initializing with unix domain socket, username and password', () => {
-        const subject = parse('postgres://brian:pw@/mydb?socket=' + encodeURIComponent('/const/run/'));
+        const subject = parse('postgres://brian:pw@%2Fconst%2Frun%2F/mydb');
         subject.user.should.equal('brian');
         subject.password.should.equal('pw');
         subject.host.should.equal('/const/run/');
