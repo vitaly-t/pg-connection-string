@@ -22,13 +22,6 @@ function parse(str) {
         config.client_encoding = config.encoding;
     }
 
-    // primary sockets support, via parameter 'socket':
-    if (config.socket) {
-        config.host = config.socket;
-        return config;
-    }
-
-    // secondary support for unix sockets, when host name ends with '.sock':
     if (cs.hosts && cs.hosts[0].type === 'socket') {
         return config;
     }
