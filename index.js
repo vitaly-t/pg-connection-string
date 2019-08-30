@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const ConnectionString = require('connection-string');
+const ConnectionString = require('connection-string').ConnectionString;
 
 // parses a connection string
 function parse(str) {
